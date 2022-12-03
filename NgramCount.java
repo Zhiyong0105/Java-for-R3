@@ -1,27 +1,30 @@
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class NgramCount {
     StringBuffer line =new StringBuffer();
     Map<String,Integer> map = new HashMap<>();
-    public NgramCount(StringBuffer line) {
+    private int N=0;
+    public NgramCount(StringBuffer line,int N) {
         this.line =line ;
+        this.N = N;
 
     }
     public Map<String,Integer> mapCount()
     {
         for (int i = 0; i < line.length(); i++) {
             String x = new String();
-            if (i+6>line.length()) {
-                int m = line.length()-i;
-                x =line.substring(i,i+m);
+            if (i+N>line.length()) {
+                x = null;
+                break;
             }
             else{
-                x = line.substring(i, i+6);
+                x = line.substring(i, i+N);
 
             }
-            
           
             if (!map.containsKey(x)) {
                 map.put(x, 1);
@@ -34,10 +37,23 @@ public class NgramCount {
         return map;
 
     }
+    public void print() {
+        Collection<Integer> Key = map.values();
+        int maxCount = Collections.max(Key);
+        for (Map.Entry<String, Integer> kmap : map.entrySet()) {
+            if (maxCount == kmap.getValue()) {
+                System.out.printf("%s %d\n", kmap.getKey(), maxCount);
+
+            }
+        }
+    }
+  
     public void PandC()
     {
         map = mapCount();
-        System.out.println(map);
+        print();
+       
+
 
     }
 

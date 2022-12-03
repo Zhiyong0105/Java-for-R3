@@ -13,7 +13,6 @@ public class WordCount {
         this.map =map ;
 
     }
-
     public void print() {
         Collection<Integer> Key = map.values();
         int maxCount = Collections.max(Key);
