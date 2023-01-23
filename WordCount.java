@@ -23,5 +23,27 @@ public class WordCount {
             }
         }
     }
+    public void printB() {
+        Collection<Integer> Key = map.values();
+        int maxCount = Collections.min(Key);
+        int count = 0;
+        for (Map.Entry<Character, Integer> kmap : map.entrySet()) {
+            if (maxCount == kmap.getValue()) {
+                count++;
+                
+                
+
+            }
+        }
+        System.out.println(count);
+        for (Map.Entry<Character, Integer> kmap : map.entrySet()) {
+            if (maxCount == kmap.getValue()) {
+                System.out.println( kmap.getKey());
+                
+                break;
+
+            }
+        }
+    }
 
 }

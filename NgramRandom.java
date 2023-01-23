@@ -1,6 +1,5 @@
-import java.lang.reflect.Constructor;
-import java.util.Collection;
-import java.util.Collections;
+
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +7,6 @@ public class NgramRandom {
     StringBuffer line = new StringBuffer();
     private int N;
     Map<String, Map<Character, Integer>> map = new HashMap<>();
-    
 
     public NgramRandom(StringBuffer line, int N) {
         this.line = line;
@@ -30,7 +28,6 @@ public class NgramRandom {
 
     public void Count() {
         String s = new String();
-
         for (int i = 0; i < line.length(); i++) {
             s = str(i);
             if (s == null) {
@@ -40,8 +37,7 @@ public class NgramRandom {
             String sN = s.substring(0, N - 1);
             String s1 = s.substring(N - 1);
             char c = s1.charAt(0);
-            if (!(map.containsKey(sN))) 
-            {
+            if (!(map.containsKey(sN))) {
                 if (!(cmap.containsKey(c))) {
                     cmap.put(c, 1);
                 }
@@ -49,62 +45,53 @@ public class NgramRandom {
             } else {
                 Map<Character, Integer> cmap1 = new HashMap<>();
                 cmap1 = map.get(sN);
-                if(!(cmap1.containsKey(c)))
-                {
-                    cmap1.put(c,1);
-                }
-                else{
+                if (!(cmap1.containsKey(c))) {
+                    cmap1.put(c, 1);
+                    map.put(sN,cmap1);
+                } else {
                     int times = cmap1.get(c) + 1;
                     cmap1.remove(c);
                     cmap1.put(c, times);
                     map.remove(sN, cmap1);
                     map.put(sN, cmap1);
                 }
-               
 
             }
         }
     }
-    public String Genstr(String ct)
-    {
-        int count = 1000;//生成回数
-        int len =0;
-        Map<Character,Integer> gmap = new HashMap<>();
+
+    public String Genstr(String ct) {
+        int count = 1000;// 生成回数
+        int len = 0;
+        Map<Character, Integer> gmap = new HashMap<>();
         String tmp = ct;
         String c = new String();
-      for(int i = 0; i<count;i++)
-      {
-        gmap = map.get(tmp);
-         RandomFile rf = new RandomFile(gmap);
-         if(gmap==null)
-         {
-            return ct;
-         }
-         c = rf.random();
-         ct += c;
-         tmp = ct;
-         len = tmp.length();
+        for (int i = 0; i < count; i++) {
+            gmap = map.get(tmp);
+            RandomFile rf = new RandomFile(gmap);
+            /* 末尾の停止*/
+            if (gmap == null) {
+                return ct;
+            }
+            c = rf.random();
+            ct += c;
+            tmp = ct;
+            len = tmp.length();
 
-          tmp = tmp.substring(len-N+1,len);
-//         System.out.print(tmp);
-      }
+            tmp = tmp.substring(len - N + 1, len);
+            // System.out.print(tmp);
+        }
 
         return ct;
     }
-   
-
 
     public void print() {
         Count();
         String context = new String();
-        context = line.substring(0, N-1);
+        context = line.substring(0, N - 1);
         context = Genstr(context);
         System.out.println(context);
-       
-      
 
-
-        
     }
 
 }

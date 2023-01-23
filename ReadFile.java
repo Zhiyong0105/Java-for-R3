@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +39,11 @@ public class ReadFile {
         String encoding = "utf8";
         // UnicodeFind readfile = new UnicodeFind();
         InputStream is = null;
-        ReadFile rd = new ReadFile();
+        //ReadFile rd = new ReadFile();
         StringBuffer Aline = new StringBuffer();
-        Map<Character, Integer> map = new HashMap<>();
+        //Map<Character, Integer> map = new HashMap<>();
+        ArrayList<String> list = new ArrayList<>();
+        
 
         try {
             is = new FileInputStream(filename);
@@ -64,8 +67,9 @@ public class ReadFile {
                 line = br.readLine();
                 if (line == null)
                     break;
-                line.replace("\n", "");
-                // Aline.append(line);
+                    list.add(line);
+                 line.replace("\n", "");
+                  Aline.append(line);
 
                 // for (int i = 0; i < line.length(); i++) {
                 //     char x = line.charAt(i);
@@ -85,7 +89,7 @@ public class ReadFile {
         // System.out.println(Aline);
         // NgramCount nc = new NgramCount(Aline,2);
         // nc.PandC();
-        // NgramRandom nr = new NgramRandom(Aline, 3);
+        // NgramRandom nr = new NgramRandom(Aline, 2);
         // nr.print();
 
         try {
@@ -93,10 +97,13 @@ public class ReadFile {
         } catch (IOException e) {
             throw (new Error(e));
         }
-        // WordCount wc = new WordCount(map);
+       
         // RandomFile rf = new RandomFile(map);
-        // rf.randomP();
-        // wc.print();
+        // rf.randomB();
+        // WordCount wc = new WordCount(map);
+        // wc.printB();
+        tfidef tf = new tfidef(list);
+        tf.tf_idf();
 
     }
 }

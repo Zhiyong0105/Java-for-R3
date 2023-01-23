@@ -1,12 +1,14 @@
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.List;
 public class NgramCount {
     StringBuffer line =new StringBuffer();
     Map<String,Integer> map = new HashMap<>();
+    
     private int N=0;
     public NgramCount(StringBuffer line,int N) {
         this.line =line ;
